@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets -- never commit real credentials
+.env
+.env.*
+!.env.example
+
+# Test artifacts
+tests/results.json
+
+# Logs and OS files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editor / IDE folders
+.vscode/
+.idea/

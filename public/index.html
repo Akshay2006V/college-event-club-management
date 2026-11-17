@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="College events and student clubs on campus." />
+  <title>EventHub | College Events &amp; Clubs</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="EventHub home">
+        <span class="brand-word">EventHub</span>
+        <span class="brand-sub">Campus</span>
+      </a>
+
+      <label class="search-box" aria-label="Search events and clubs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <input type="search" id="global-search" placeholder="Search events, clubs or venues" autocomplete="off" />
+      </label>
+
+      <div class="topbar-actions">
+        <span class="location">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>Main Campus</span>
+        </span>
+        <details class="admin-menu">
+          <summary>Admin <span aria-hidden="true">▾</span></summary>
+          <div class="menu">
+            <a href="clubs.html">Manage clubs</a>
+            <a href="events.html">Manage events</a>
+            <a href="events.html">Event registrations</a>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <nav class="mainnav" aria-label="Main navigation">
+      <div class="mainnav-inner">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="index.html#about">About</a></li>
+        </ul>
+        <span class="nav-note">Campus events &amp; clubs</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="billboard" aria-label="Featured event">
+      <div class="billboard-inner">
+        <div>
+          <div class="billboard-tag">
+            <span class="mark">EventHub</span>
+            <span class="dot"></span>
+            <span>Featured event</span>
+            <span class="dot"></span>
+            <span>Main Campus</span>
+          </div>
+          <h1 id="bb-title">Campus life, all in one place.</h1>
+          <div class="billboard-meta" id="bb-meta">
+            <span class="mi">Campus Events</span>
+          </div>
+          <p class="billboard-desc" id="bb-desc">
+            Discover workshops, cultural nights, sports tournaments and club activities happening on campus this semester.
+          </p>
+          <div class="billboard-actions">
+            <button class="btn btn-primary btn-lg" id="bb-register" type="button">Register now</button>
+            <a class="btn btn-ghost btn-lg" href="events.html">Browse all events</a>
+          </div>
+        </div>
+        <div class="billboard-art" aria-hidden="true">
+          <div class="poster">
+            <div class="poster-label" id="bb-label">Campus Events</div>
+            <div class="poster-date"><span id="bb-day">17</span><small id="bb-month">NOV</small></div>
+            <div class="poster-title" id="bb-poster-title">EventHub</div>
+            <div class="poster-foot" id="bb-poster-foot">Five clubs · Six events<br>Campus-wide</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Campus statistics">
+      <div class="container">
+        <div class="stats-inner">
+          <div class="stat">
+            <div class="value" id="stat-clubs">–</div>
+            <div class="label">Student clubs</div>
+          </div>
+          <div class="stat">
+            <div class="value" id="stat-events">–</div>
+            <div class="label">Events this term</div>
+          </div>
+          <div class="stat">
+            <div class="value" id="stat-registrations">–</div>
+            <div class="label">Registrations</div>
+          </div>
+          <div class="stat">
+            <div class="value" id="stat-upcoming">–</div>
+            <div class="label">Upcoming events</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="row-section">
+        <div class="row-head">
+          <div>
+            <h2>Upcoming on campus</h2>
+            <p class="sub">The next few things worth showing up for.</p>
+          </div>
+          <a class="see-all" href="events.html">See all events <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="row-wrap">
+          <button class="row-arrow prev" type="button" aria-label="Scroll left">‹</button>
+          <div class="hrow" id="upcoming-row">
+            <div class="state"><div class="spinner"></div>Loading events…</div>
+          </div>
+          <button class="row-arrow next" type="button" aria-label="Scroll right">›</button>
+        </div>
+      </section>
+    </div>
+
+    <section class="row-section band">
+      <div class="container">
+        <div class="row-head">
+          <div>
+            <h2>Clubs on campus</h2>
+            <p class="sub">Five student-run clubs, one calendar.</p>
+          </div>
+          <a class="see-all" href="clubs.html">Explore clubs <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="row-wrap">
+          <button class="row-arrow prev" type="button" aria-label="Scroll left">‹</button>
+          <div class="hrow" id="clubs-row">
+            <div class="state"><div class="spinner"></div>Loading clubs…</div>
+          </div>
+          <button class="row-arrow next" type="button" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="organiser-band" id="about">
+        <div class="organiser-inner">
+          <div>
+            <h3>Run a club or planning an event?</h3>
+            <p>Add the club, publish the event and open registrations in a couple of minutes.</p>
+          </div>
+          <div class="billboard-actions">
+            <a class="btn btn-primary" href="clubs.html">＋ Add a club</a>
+            <a class="btn btn-outline" href="events.html">Publish an event</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="brand-word">EventHub</span></a>
+        <p>Campus events and clubs, in one place. Built with HTML, CSS, JavaScript and MongoDB.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="events.html">All events</a>
+        <a href="clubs.html">Student clubs</a>
+        <a href="index.html">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <span>EventHub</span>
+        <span>Campus demo</span>
+        <span>Full Stack Web Development</span>
+      </div>
+      <div class="footer-col">
+        <h4>Stack</h4>
+        <span>HTML · CSS · JavaScript</span>
+        <span>Node.js · Express</span>
+        <span>MongoDB</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2026 Akshay Vankayala · EventHub</span>
+        <span>HTML · CSS · JavaScript · MongoDB</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Registration modal -->
+  <div class="modal-overlay" id="home-register-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="home-register-title">
+      <div class="modal-header">
+        <h2 id="home-register-title">Register for event</h2>
+        <button class="modal-close" id="home-reg-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="reg-event">
+          <div class="reg-date"><span id="home-reg-day">01</span><small id="home-reg-month">DEC</small></div>
+          <div>
+            <h4 id="home-reg-name">Event name</h4>
+            <p id="home-reg-meta">Date · Venue</p>
+          </div>
+        </div>
+        <form id="home-register-form" novalidate>
+          <input type="hidden" id="home-register-event-id" />
+          <div class="form-group">
+            <label for="home-participant-name">Your name *</label>
+            <input class="form-control" type="text" id="home-participant-name" placeholder="Full name" />
+            <span class="field-error" id="home-participant-name-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="home-participant-email">Email *</label>
+            <input class="form-control" type="email" id="home-participant-email" placeholder="you@example.com" />
+            <span class="field-error" id="home-participant-email-error"></span>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="home-reg-cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="home-reg-submit">Confirm registration</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

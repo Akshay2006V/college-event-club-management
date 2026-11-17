@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Student clubs on campus." />
+  <title>Clubs | EventHub</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="EventHub home">
+        <span class="brand-word">EventHub</span>
+        <span class="brand-sub">Campus</span>
+      </a>
+
+      <label class="search-box" aria-label="Search clubs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <input type="search" id="global-search" placeholder="Search clubs or coordinators" autocomplete="off" />
+      </label>
+
+      <div class="topbar-actions">
+        <span class="location">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>Main Campus</span>
+        </span>
+        <details class="admin-menu">
+          <summary>Admin <span aria-hidden="true">▾</span></summary>
+          <div class="menu">
+            <a href="clubs.html">Manage clubs</a>
+            <a href="events.html">Manage events</a>
+            <a href="events.html">Event registrations</a>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <nav class="mainnav" aria-label="Main navigation">
+      <div class="mainnav-inner">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="index.html#about">About</a></li>
+        </ul>
+        <span class="nav-note">Campus events &amp; clubs</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <div>
+        <div class="breadcrumb"><a href="index.html">Home</a> / Clubs</div>
+        <h1>Student clubs</h1>
+        <p>Five student-run clubs covering technology, culture, sport, debate and campus service.</p>
+      </div>
+      <button class="btn btn-primary" id="add-club-btn" type="button">＋ Add club</button>
+    </div>
+
+    <div class="filterbar" aria-label="Filter clubs by category">
+      <button class="chip active" type="button" data-category="All">All clubs</button>
+      <button class="chip" type="button" data-category="Technical">Technical</button>
+      <button class="chip" type="button" data-category="Cultural">Cultural</button>
+      <button class="chip" type="button" data-category="Sports">Sports</button>
+      <button class="chip" type="button" data-category="Literary">Literary</button>
+      <button class="chip" type="button" data-category="Social Service">Social service</button>
+      <button class="chip" type="button" data-category="Other">Other</button>
+      <span class="result-count" id="club-count">Loading…</span>
+    </div>
+
+    <div id="club-grid" class="club-grid">
+      <div class="state grid-state"><div class="spinner"></div>Loading clubs…</div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="brand-word">EventHub</span></a>
+        <p>Campus events and clubs, in one place. Built with HTML, CSS, JavaScript and MongoDB.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="events.html">All events</a>
+        <a href="clubs.html">Student clubs</a>
+        <a href="index.html">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <span>EventHub</span>
+        <span>Campus demo</span>
+        <span>Full Stack Web Development</span>
+      </div>
+      <div class="footer-col">
+        <h4>Stack</h4>
+        <span>HTML · CSS · JavaScript</span>
+        <span>Node.js · Express</span>
+        <span>MongoDB</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2026 Akshay Vankayala · EventHub</span>
+        <span>HTML · CSS · JavaScript · MongoDB</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Add / Edit club modal -->
+  <div class="modal-overlay" id="club-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h2 id="modal-title">Add club</h2>
+        <button class="modal-close" id="modal-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="club-form" novalidate>
+          <input type="hidden" id="club-id" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Club name *</label>
+              <input class="form-control" type="text" id="name" placeholder="e.g. Robotics Club" />
+              <span class="field-error" id="name-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="category">Category *</label>
+              <select class="form-control" id="category">
+                <option value="">Select category</option>
+                <option>Technical</option>
+                <option>Cultural</option>
+                <option>Sports</option>
+                <option>Literary</option>
+                <option>Social Service</option>
+                <option>Other</option>
+              </select>
+              <span class="field-error" id="category-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" placeholder="What does this club do?"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="coordinator">Coordinator *</label>
+              <input class="form-control" type="text" id="coordinator" placeholder="Faculty coordinator name" />
+              <span class="field-error" id="coordinator-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Contact email *</label>
+              <input class="form-control" type="email" id="email" placeholder="club@example.com" />
+              <span class="field-error" id="email-error"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="establishedYear">Established year</label>
+              <input class="form-control" type="number" id="establishedYear" min="1900" max="2027" placeholder="e.g. 2016" />
+              <span class="field-error" id="establishedYear-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="members">Number of members</label>
+              <input class="form-control" type="number" id="members" min="0" placeholder="0" />
+              <span class="field-error" id="members-error"></span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-btn">Save club</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/clubs.js"></script>
+</body>
+</html>

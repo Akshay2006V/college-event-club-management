@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Upcoming events and registrations on campus." />
+  <title>Events | EventHub</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="EventHub home">
+        <span class="brand-word">EventHub</span>
+        <span class="brand-sub">Campus</span>
+      </a>
+
+      <label class="search-box" aria-label="Search events">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <input type="search" id="global-search" placeholder="Search events, clubs or venues" autocomplete="off" />
+      </label>
+
+      <div class="topbar-actions">
+        <span class="location">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>Main Campus</span>
+        </span>
+        <details class="admin-menu">
+          <summary>Admin <span aria-hidden="true">▾</span></summary>
+          <div class="menu">
+            <a href="clubs.html">Manage clubs</a>
+            <a href="events.html">Manage events</a>
+            <a href="events.html">Event registrations</a>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <nav class="mainnav" aria-label="Main navigation">
+      <div class="mainnav-inner">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="clubs.html">Clubs</a></li>
+          <li><a href="index.html#about">About</a></li>
+        </ul>
+        <span class="nav-note">Campus events &amp; clubs</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <div>
+        <div class="breadcrumb"><a href="index.html">Home</a> / Events</div>
+        <h1>College events</h1>
+        <p>Workshops, cultural nights, tournaments and talks — everything happening this semester.</p>
+      </div>
+      <button class="btn btn-primary" id="add-event-btn" type="button">＋ Add event</button>
+    </div>
+
+    <div class="filterbar" aria-label="Filter events by status">
+      <button class="chip active" type="button" data-status="All">All events</button>
+      <button class="chip" type="button" data-status="Upcoming">Upcoming</button>
+      <button class="chip" type="button" data-status="Ongoing">Ongoing</button>
+      <button class="chip" type="button" data-status="Completed">Completed</button>
+      <span class="result-count" id="event-count">Loading…</span>
+    </div>
+
+    <div class="event-list" id="events-wrap">
+      <div class="state"><div class="spinner"></div>Loading events…</div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="brand-word">EventHub</span></a>
+        <p>Campus events and clubs, in one place. Built with HTML, CSS, JavaScript and MongoDB.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="events.html">All events</a>
+        <a href="clubs.html">Student clubs</a>
+        <a href="index.html">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <span>EventHub</span>
+        <span>Campus demo</span>
+        <span>Full Stack Web Development</span>
+      </div>
+      <div class="footer-col">
+        <h4>Stack</h4>
+        <span>HTML · CSS · JavaScript</span>
+        <span>Node.js · Express</span>
+        <span>MongoDB</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2026 Akshay Vankayala · EventHub</span>
+        <span>HTML · CSS · JavaScript · MongoDB</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Add / Edit event modal -->
+  <div class="modal-overlay" id="event-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h2 id="modal-title">Add event</h2>
+        <button class="modal-close" id="modal-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="event-form" novalidate>
+          <input type="hidden" id="event-id" />
+
+          <div class="form-group">
+            <label for="title">Event title *</label>
+            <input class="form-control" type="text" id="title" placeholder="e.g. Annual Tech Fest" />
+            <span class="field-error" id="title-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="clubId">Organising club *</label>
+            <select class="form-control" id="clubId">
+              <option value="">Select a club</option>
+            </select>
+            <span class="field-error" id="clubId-error"></span>
+          </div>
+
+          <div class="form-row cols-3">
+            <div class="form-group">
+              <label for="date">Date *</label>
+              <input class="form-control" type="date" id="date" />
+              <span class="field-error" id="date-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="time">Time</label>
+              <input class="form-control" type="time" id="time" />
+            </div>
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select class="form-control" id="status">
+                <option>Upcoming</option>
+                <option>Ongoing</option>
+                <option>Completed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="venue">Venue *</label>
+              <input class="form-control" type="text" id="venue" placeholder="e.g. Main Auditorium" />
+              <span class="field-error" id="venue-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="capacity">Capacity *</label>
+              <input class="form-control" type="number" id="capacity" min="1" placeholder="e.g. 100" />
+              <span class="field-error" id="capacity-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" placeholder="Details about the event"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-btn">Save event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registration modal -->
+  <div class="modal-overlay" id="register-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="register-heading">
+      <div class="modal-header">
+        <h2 id="register-heading">Register for event</h2>
+        <button class="modal-close" id="reg-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="reg-event">
+          <div class="reg-date"><span id="reg-day">01</span><small id="reg-month">DEC</small></div>
+          <div>
+            <h4 id="reg-name">Event name</h4>
+            <p id="reg-meta">Date · Venue</p>
+          </div>
+        </div>
+        <form id="register-form" novalidate>
+          <input type="hidden" id="register-event-id" />
+          <div class="form-group">
+            <label for="participant-name">Your name *</label>
+            <input class="form-control" type="text" id="participant-name" placeholder="Full name" />
+            <span class="field-error" id="participant-name-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="participant-email">Email *</label>
+            <input class="form-control" type="email" id="participant-email" placeholder="you@example.com" />
+            <span class="field-error" id="participant-email-error"></span>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="reg-cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="reg-submit-btn">Confirm registration</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/events.js"></script>
+</body>
+</html>
